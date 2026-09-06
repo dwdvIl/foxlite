@@ -380,11 +380,7 @@ class FoxRenderer {
 	public static function useTexture(sampler:Int, texture:FoxTexture) {
 		var gl = context.gl;
 		var glTexture = texture.glTexture;
-		context.setTextureAt(sampler, glTexture);
-		context.setSamplerStateAt(sampler, cast texture.wrapMode, cast texture.filter, 
-			cast texture.mipFilter);
-		// __flushGLTextures() but cut-down
-		glTexture.__setSamplerState(context.__state.samplerStates[sampler]);
+		
 		GL.activeTexture(gl.TEXTURE0 + sampler);
 
 		if(glTexture.__textureTarget == gl.TEXTURE_2D) {
@@ -393,6 +389,13 @@ class FoxRenderer {
 		else if(glTexture.__textureTarget == gl.TEXTURE_CUBE_MAP) {
 			context.__bindGLTextureCubeMap(glTexture.__textureID);
 		}
+		
+		context.setTextureAt(sampler, glTexture);
+		context.setSamplerStateAt(sampler, cast texture.wrapMode, cast texture.filter, 
+			cast texture.mipFilter);
+		// __flushGLTextures() but cut-down
+		glTexture.__setSamplerState(context.__state.samplerStates[sampler]);
+		
 	}
 
 	public static function activeTextures(context:Context3D, textureInput:Map<String, foxlite.FoxShader.FoxShaderTextureInput>):Int {

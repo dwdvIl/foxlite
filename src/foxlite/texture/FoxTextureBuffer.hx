@@ -1,7 +1,6 @@
 package foxlite.texture;
 
 import Reflect;
-import foxlite.polyfill.TypedArray;
 import foxlite.renderer.FoxRenderer;
 import foxlite.texture.FoxTexture;
 import haxe.io.Bytes;
@@ -78,9 +77,7 @@ class FoxTextureBuffer extends FoxTexture {
 
 		_length = length;
 		
-		var data:Array<Float> = [];
-		data.resize(length * channels);
-		buffer = TypedArray.Float32Array(data); // Data gets initialized to 0f, no need for a loop
+		buffer = new Float32Array(length * channels);
 		bytes = cast buffer.buffer;
 		FoxRenderer.allocationsThisFrame += 2;
 
@@ -135,7 +132,7 @@ class FoxTextureBuffer extends FoxTexture {
 	public inline function updateGPU() {
 		var gl = #if foxlite_polymod GL; #else context.gl; #end // Use lime GL for HScript
 		
-		#if js
+		#if (js && html5)
 		gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 0); // do NOT PREMULTIPLY RGB WITH ALPHA, it will MESS UP texture buffers.
 		#end
 
