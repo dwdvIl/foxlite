@@ -75,7 +75,7 @@ class FoxInstancedModel extends FoxModel {
 		// Only reallocate when we need more instances
 		if(v > __maxInstanceCount) {
 			if(instanceData != null) instanceData.reallocate(v);
-			else trace("Warning! instanceData is null! Please assign one and try again!");
+			else FoxLog.warning('FoxInstancedModel', 'instanceData is null! Please assign one and try again!');
 			__maxInstanceCount = v;
 		}
 		if(v == 0 || this.instanceCount == 0) {

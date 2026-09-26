@@ -169,11 +169,11 @@ class FoxCamera extends FoxObject {
 			// Get render target
 			var framebuffer:FoxFramebuffer = scene.renderTargets.get(pass.target);
 			if(framebuffer == null) {
-				trace('[FoxLite > FoxCamera]: WARNING: Scene does not have target "${pass.target}"');
+				FoxLog.warning('FoxCamera', 'Scene does not have target "${pass.target}"');
 				continue;
 			}
 			if(pass.groups.length == 0) {
-				//trace('[FoxLite > FoxCamera]: WARNING: Pass "${pass.name}" does not have groups to draw! Consider disabling this pass!');
+				//FoxLog.warning('FoxCamera', 'Pass "${pass.name}" does not have groups to draw! Consider disabling this pass!');
 				continue;
 			}
 

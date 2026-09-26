@@ -72,8 +72,8 @@ class FoxCache {
 	}
 
 	public function freeResources():Void {
-		#if debug
-		trace("[FoxLite > FoxCache]: CLEARING CACHE!");
+		#if foxlite_verbose
+		FoxLog.log("FoxCache", "CLEARING CACHE!");
 		#end
 		for(r in _texture) r?.destroy();
 		for(r in _shaders) r?.destroy();

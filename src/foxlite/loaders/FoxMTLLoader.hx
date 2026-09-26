@@ -37,7 +37,7 @@ class FoxMTLLoader {
 		if(FoxCache.materialLibs().exists(name)) return FoxCache.materialLibs().get(name);
 		var mtl = FoxLoaderUtil.loadText(name);
 		if(mtl == null) {
-			trace('[Foxlite > FoxOBJLoader]: Could not load MTL: ${name} (Not found.)');
+			FoxLog.warning('FoxOBJLoader', 'Could not load MTL: ${name} (Not found.)');
 			return null;
 		}
 		var dir = Path.directory(name) + '/';

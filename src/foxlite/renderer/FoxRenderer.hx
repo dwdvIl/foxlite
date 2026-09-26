@@ -206,7 +206,7 @@ class FoxRenderer {
 		
 		FoxRenderer.renderContext = '${window.context.type}'.toUpperCase();
 		FoxRenderer.glDeviceName = gl.getParameter(gl.RENDERER);
-		trace('[FoxLite > FoxRenderer]: lime is ${renderContext} (${Std.string(GL.context)}):\n    - Shader model: ${GL.getParameter(context.gl.SHADING_LANGUAGE_VERSION)}\n    - Device: $glDeviceName');
+		FoxLog.log('FoxRenderer', 'lime is ${renderContext} (${Std.string(GL.context)}):\n    - Shader model: ${GL.getParameter(context.gl.SHADING_LANGUAGE_VERSION)}\n    - Device: $glDeviceName');
 	
 		// Activate extensions
 		extensions.drawBuffersEXT = GL.getExtension("ARB_draw_buffers")
@@ -279,15 +279,15 @@ class FoxRenderer {
 		 && extensions.astc == null
 		 && extensions.etc1 == null);
 
-		trace('[FoxLite > FoxRenderer]: Texture Anisotropy ${extensions.anisotropic == null ?  "not" : "is"} supported.');
+		FoxLog.log('FoxRenderer', 'Texture Anisotropy ${extensions.anisotropic == null ?  "not" : "is"} supported.');
 
 		var extTxt = new StringBuf();
-		extTxt.add("[FoxLite > FoxRenderer]: Active Extensions: ");
+		extTxt.add("Active Extensions: ");
 		for(extName in Reflect.fields(extensions)) {
 			var ext = Reflect.field(extensions, extName);
 			if(ext != null) extTxt.add('${Std.string(ext)}  ');
 		}
-		trace(extTxt.toString());
+		FoxLog.log("FoxRenderer", extTxt.toString());
 
 		// Initialize missing texture
 		MISSING_TEXTURE = FoxTexture.create(2, 2, "rgba", "UNSIGNED_SHORT_4_4_4_4");
@@ -1104,7 +1104,7 @@ class FoxRenderer {
 		var gl = context.gl;
 		var status = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
 		if(status != gl.FRAMEBUFFER_COMPLETE) {
-			trace('[FoxLite > FoxRenderer] Warning: FRAMEBUFFER NOT COMPLETE. Status: $status');
+			FoxLog.warning('FoxRenderer', 'FRAMEBUFFER NOT COMPLETE. Status: $status');
 			return false;
 		}
 		return true;

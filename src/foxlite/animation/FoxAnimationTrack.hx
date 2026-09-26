@@ -24,11 +24,11 @@ class FoxAnimationTrack #if !foxlite_polymod <T> #end {
 
 	public function addFrames(times:Array<Float>, values:Array<T>, ?easings:Array<FoxEaseType>) {
 		if(times.length > values.length) {
-			trace('[FoxLite > FoxAnimationTrack]: Warning: times array and values array size mismatch (${times.length} != ${values.length}). No action performed.');
+			FoxLog.warning('FoxAnimationTrack', 'Times array and values array size mismatch (${times.length} != ${values.length}). No action performed.');
 			return;
 		}
 		else if(times.length < values.length) {
-			trace('[FoxLite > FoxAnimationTrack]: Warning: times array is smaller than values array, animation will be truncated. (${times.length} < ${values.length})');
+			FoxLog.warning('FoxAnimationTrack', 'Times array is smaller than values array, animation will be truncated. (${times.length} < ${values.length})');
 		}
 		for(i=>t in times) {
 			addFrame(t, values[i], easings != null ? (easings[i] ?? FoxEaseType.LINEAR) : FoxEaseType.LINEAR);

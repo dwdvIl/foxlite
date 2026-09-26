@@ -83,7 +83,7 @@ class FoxPhysicsWorld extends FoxBasic {
 
 	public static function staticInit() {
 		var version = Box3D.getVersion();
-		trace('[FoxLite > FoxPhysicsWorld]: Initialized Box3D version ${version.major}.${version.minor} rev. ${version.revision}');
+		FoxLog.log('FoxPhysicsWorld', 'Initialized Box3D version ${version.major}.${version.minor} rev. ${version.revision}');
 	}
 
 	/**
