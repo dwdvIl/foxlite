@@ -27,7 +27,7 @@ mat4 transformBillboard(inout mat4 M, in mat4 viewMatrix) {
 	vec3 scale = vec3(
 		length(vec3(M[0])),
 		length(vec3(M[1])),
-		length(vec3(m[2]))
+		length(vec3(M[2]))
 	);
 	#else
 	const vec3 scale = vec3(1);
